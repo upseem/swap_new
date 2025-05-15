@@ -1,0 +1,76 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv/
+venv/
+env/
+ENV/
+
+# VSCode
+.vscode/
+
+# Logs
+*.log
+logs/
+*.out
+*.err
+
+# Environment
+.env
+.env.*
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# FastAPI / Uvicorn cache
+*.sqlite3
+*.db
+*.pid
+
+# Model files
+*.pth
+*.pt
+*.onnx
+*.ckpt
+*.npz
+*.npy
+
+# Temporary data / output
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.mp4
+*.avi
+*.zip
+*.tar.gz
+*.bak
+
+# Autodl / ComfyUI output
+autodl-tmp/
+autodl-fs/
+output/
+public/
+__output_cache__/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# PyInstaller
+dist/
+build/
+*.spec
+
+# MyPy / pytest / coverage
+.mypy_cache/
+.pytest_cache/
+htmlcov/
+coverage.xml
+.cache/
+.tox/
+*.json
+

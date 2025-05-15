@@ -1,0 +1,19 @@
+# config.yaml
+
+server:
+  host: 0.0.0.0
+  port: 6006
+
+comfyui:
+  server_address: 127.0.0.1:6001
+  swap_json: swap-ws.json
+
+storage:
+  root_dir: /root/autodl-fs/cashbox-ai
+
+log:
+  level: info
+  timezone: Asia/Shanghai
+  directory: /root/autodl-tmp/swap/logs
+  filename_prefix: swap
+  retention_days: 30

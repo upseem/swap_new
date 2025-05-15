@@ -12,10 +12,12 @@ class WebSocketManager:
         self.url = f"ws://{server_address}/ws?clientId={client_id}"
         self.ws = None
         self.lock = threading.Lock()
+        self._heartbeat_running = False
 
     def connect(self):
         try:
-            self.ws = create_connection(self.url, timeout=5)
+            self.ws = create_connection(self.url, timeout=15)
+            self.ws.settimeout(60) 
             logger.info("✅ WebSocket connected to %s", self.url)
         except Exception as e:
             logger.error(f"WebSocket connection failed: {e}")
@@ -43,16 +45,21 @@ class WebSocketManager:
             return None
 
     def heartbeat_loop(self, interval=5):
-        while True:
+        self._heartbeat_running = True
+        while self._heartbeat_running:
             try:
                 self.send("ping")
             except Exception:
                 pass
             time.sleep(interval)
 
-    def start_heartbeat(self):
-        thread = threading.Thread(target=self.heartbeat_loop, daemon=True)
-        thread.start()
+    def start_heartbeat(self, interval=10):  # 默认 10 秒
+        if not self._heartbeat_running:
+            thread = threading.Thread(target=self.heartbeat_loop, args=(interval,), daemon=True)
+            thread.start()
+
+    def stop_heartbeat(self):
+        self._heartbeat_running = False
 
     def get_images(self, prompt_id):
         output_image = None

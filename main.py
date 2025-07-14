@@ -135,8 +135,8 @@ async def swap_faces(request: SwapRequest):
         )
 
         if source_base64 is None or input_base64 is None:
-            logger.warning(f"❌ 无法获取图片数据, 图片:{request.source_image},{request.input_image}, 编号:{current_count}")
-            return SwapResponse(code=1000, message=f"图片URL获取失败, 编号:{current_count}")
+            logger.warning(f"❌ 图片URL获取失败, 编号:{current_count},图片:{request.source_image},{request.input_image}")
+            return SwapResponse(code=1000, message=f"❌ 图片URL获取失败, 编号:{current_count},图片:{request.source_image},{request.input_image}")
 
         ws_manager.ensure_connected()
         prompt = load_json_to_dict(swap_json)

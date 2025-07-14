@@ -4,6 +4,7 @@ import json
 import time
 import base64 
 import aiohttp
+from yarl import URL
 import urllib.request
 from urllib.parse import urlparse  
 
@@ -122,3 +123,11 @@ def queue_prompt(prompt, client_id: str, server_address: str, max_retries: int =
             else:
                 raise
 
+
+def sanitize_url_yarl(url: str) -> str:
+    """
+    使用 yarl 安全处理 URL,移除路径中的多余 //，保留参数、锚点等
+    """
+    u = URL(url)
+    clean_path = re.sub(r'/{2,}', '/', u.path)
+    return u.with_path(clean_path).human_repr()
